@@ -61,7 +61,7 @@ var defaultBooks = [
   },
 ]
 
-const localPage = Number(localStorage.getItem('page'))
+// const localPage = Number(localStorage.getItem('page'))
 
 function Content() {
   const [books, setBooks] = useLocalStorage('books', defaultBooks)
@@ -95,6 +95,7 @@ function Content() {
 
   function handleDelete(item) {
     setBooks(books.filter((book) => book.id !== item.id))
+    setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
   }
 
   return (

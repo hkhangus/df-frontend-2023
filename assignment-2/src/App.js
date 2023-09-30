@@ -68,7 +68,7 @@ function Content() {
   const [openModalAdd, SetModalAdd] = useState(false)
   const [isSearch, setIsSearch] = useState(false)
   const [searchValue, setSeachValue] = useState('')
-  const [resultSearchBooks, setResultBooks] = useState('')
+  const [resultSearchBooks, setResultBooks] = useState(books)
   const [openModalDelete, setModalDelete] = useState(false)
   const [deleteBook, setDeleteBook] = useState('')
 

@@ -61,11 +61,10 @@ var defaultBooks = [
   },
 ]
 
-const localPage = Number(localStorage.getItem("page"));
-
+const localPage = Number(localStorage.getItem('page'))
 
 function Content() {
-  const [books, setBooks] = useLocalStorage('books',defaultBooks)
+  const [books, setBooks] = useLocalStorage('books', defaultBooks)
   const [openModalAdd, SetModalAdd] = useState(false)
   const [isSearch, setIsSearch] = useState(false)
   const [searchValue, setSeachValue] = useState('')
@@ -79,7 +78,7 @@ function Content() {
     const firstPageIndex = (currentPage - 1) * PageSize
     const lastPageIndex = firstPageIndex + PageSize
     return books.slice(firstPageIndex, lastPageIndex)
-  }, [currentPage,books])
+  }, [currentPage, books])
 
   function handleSearch(e) {
     setSeachValue(e.target.value)
@@ -130,7 +129,13 @@ function Content() {
             </thead>
             <tbody>
               {isSearch
-                ? resultSearchBooks.map((book) => <LineBook book={book} />)
+                ? resultSearchBooks.map((book) => (
+                    <LineBook
+                      book={book}
+                      setModalDelete={setModalDelete}
+                      setDeleteBook={setDeleteBook}
+                    />
+                  ))
                 : currentTableData.map((book) => (
                     <LineBook
                       book={book}
@@ -140,17 +145,21 @@ function Content() {
                   ))}
             </tbody>
           </table>
-          {!isSearch ? <Pagination
-            className="pagination-bar"
-            currentPage={currentPage}
-            totalCount={books.length}
-            pageSize={PageSize}
-            onPageChange={(page) => setCurrentPage(page)}
-          /> : <></>}
+          {!isSearch ? (
+            <Pagination
+              className="pagination-bar"
+              currentPage={currentPage}
+              totalCount={books.length}
+              pageSize={PageSize}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
       {openModalAdd ? (
-        <ModalAdd SetModalAdd={SetModalAdd} books={books} setBooks={setBooks}/>
+        <ModalAdd SetModalAdd={SetModalAdd} books={books} setBooks={setBooks} />
       ) : null}
 
       <ModalDelete

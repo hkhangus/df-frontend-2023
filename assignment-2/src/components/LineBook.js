@@ -4,8 +4,7 @@ export default function LineBook({ book,setModalDelete, setDeleteBook }) {
   function handleOpen(e,book){
     e.preventDefault()
     setModalDelete(true)
-    setDeleteBook(book)
-    
+    setDeleteBook(book)    
   }
   
   return (

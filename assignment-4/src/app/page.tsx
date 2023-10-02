@@ -2,13 +2,77 @@
 
 import React from 'react'
 // import Image from 'next/image'
+import { Button } from '../components'
 
 
 export default function Home(){
-  return 
-    (
-      <div>Test</div>
-    )
+  
+  return (
+    <>
+      <div className="app__container bg-color bg-zinc-200">
+        <div className="control flex justify-between p-8 text-lg">
+          <input
+            type='search'
+            // value={searchValue}
+            
+            className="search"
+            placeholder="Search books"
+            // onChange={(e) => handleSearch(e)}
+          />
+          <Button className=' btn-primary'
+            // onClick={() => {
+            //   SetModalAdd(true)
+            // }}
+          >
+            Add book
+          </Button>
+        </div>
+
+        <div className="table">
+          <table className="table__content">
+            <thead className="table__header">
+              <tr>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Topic</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+            </tbody>
+          </table>
+        </div>
+        {/* {!isSearch ? (
+          <div className="pagination__wrapper">
+            <Pagination
+              totalItems={books.length}
+              itemsPerPage={PageSize}
+              currentPage={page}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        ) : null} */}
+      </div>
+
+      {/* {openModalAdd ? (
+        <ModalAdd SetModalAdd={SetModalAdd} books={books} setBooks={setBooks} />
+      ) : null}
+
+      <ModalDelete
+        openModalDelete={openModalDelete}
+        setModalDelete={setModalDelete}
+        book={deleteBook}
+        handleDelete={(item: Book) => 
+        {
+          setBooks(books.filter((book) => book.id !== item.id))
+          if (resultSearchBooks.includes(deleteBook)) {
+            setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
+          }
+        }}
+      /> */}
+    </>
+  )
 }
 
 // export default function Home() {

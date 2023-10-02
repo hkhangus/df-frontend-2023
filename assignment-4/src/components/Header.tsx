@@ -1,6 +1,6 @@
 export default function Header() {
     return (
-      <header className="">
+      <header className="flex">
         <nav className="navbar">
           <a href="./" id="bookstore">
             Bookstore

@@ -1,10 +1,10 @@
 'use client'
 
 import React from 'react'
-
+import { useLocalStorage } from 'usehooks-ts'
 // import Image from 'next/image'
 import { Book, BookList } from '../types'
-import { Button } from '../components'
+import { Button, LineBook } from '../components'
 
 const DEFAULT_BOOK: BookList = [
   {
@@ -58,16 +58,19 @@ const DEFAULT_BOOK: BookList = [
 ]
 
 export default function Home() {
+  // const [books, setBooks] = useLocalStorage('books', DEFAULT_BOOK)
+  const books = DEFAULT_BOOK
+
   return (
     <>
       <div className="app__container bg-color h-screen w-full bg-zinc-200">
         <div className="control flex justify-between p-8 text-lg">
-          <label htmlFor="search" className=' w-150'>            
+          <label htmlFor="search" className=" w-150">
             <input
               type="search"
               // value={searchValue}
-              name='search'
-              className="search rounded-xl h-full border-2 border-solid border-zinc-400 w-full"
+              name="search"
+              className="search h-full w-full rounded-xl border-2 border-solid border-zinc-400"
               placeholder="Search books"
               // onChange={(e) => handleSearch(e)}
             />
@@ -93,15 +96,31 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
+              {/* <tr>
+                <td>dsadas</td>
+                <td>sdada</td>
+                <td>Programming</td>
+                <td className="delete-click">
+                  <button className=" border-r-2 border-solid border-red-500 pr-2 text-red-500">
+                    Delete
+                  </button>
+                  <button className="pl-2 text-red-500">View</button>
+                </td>
+              </tr>
               <tr>
                 <td>Refactoring</td>
                 <td>Martin Fowler</td>
                 <td>Programming</td>
                 <td className="delete-click">
-                  <button className=' text-red-500 border-r-2 border-solid border-red-500 pr-2'>Delete</button>
-                  <button className='text-red-500 pl-2'>View</button>
+                  <button className=" border-r-2 border-solid border-red-500 pr-2 text-red-500">
+                    Delete
+                  </button>
+                  <button className="pl-2 text-red-500">View</button>
                 </td>
-              </tr>
+              </tr> */}
+              {books.map((book) => (
+                <LineBook book={book} />
+              ))}
             </tbody>
           </table>
         </div>

@@ -4,22 +4,23 @@ import React from 'react'
 // import Image from 'next/image'
 import { Button } from '../components'
 
-
-export default function Home(){
-  
+export default function Home() {
   return (
     <>
-      <div className="app__container bg-color bg-zinc-200">
+      <div className="app__container bg-color h-screen w-full bg-zinc-200">
         <div className="control flex justify-between p-8 text-lg">
-          <input
-            type='search'
-            // value={searchValue}
-            
-            className="search"
-            placeholder="Search books"
-            // onChange={(e) => handleSearch(e)}
-          />
-          <Button className=' btn-primary'
+          <label htmlFor="search" className=' w-150'>            
+            <input
+              type="search"
+              // value={searchValue}
+              name='search'
+              className="search rounded-xl h-full border-2 border-solid border-zinc-400 w-full"
+              placeholder="Search books"
+              // onChange={(e) => handleSearch(e)}
+            />
+          </label>
+          <Button
+            className=" btn-primary"
             // onClick={() => {
             //   SetModalAdd(true)
             // }}
@@ -28,8 +29,8 @@ export default function Home(){
           </Button>
         </div>
 
-        <div className="table">
-          <table className="table__content">
+        <div className="table w-full p-5">
+          <table className="table__content table-auto">
             <thead className="table__header">
               <tr>
                 <th>Name</th>
@@ -39,7 +40,12 @@ export default function Home(){
               </tr>
             </thead>
             <tbody>
-              
+              <tr>
+                <td>Refactoring</td>
+                <td>Martin Fowler</td>
+                <td>Programming</td>
+                <td className="delete-click">Delete</td>
+              </tr>
             </tbody>
           </table>
         </div>

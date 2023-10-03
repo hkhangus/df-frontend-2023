@@ -29,7 +29,7 @@ html {
 
 @layer components{
   .btn-primary {
-    @apply bg-rose-500 p-4 text-white rounded-lg
+    @apply bg-red-500 p-4 text-white rounded-lg
   }
   
   .table__content {
@@ -67,8 +67,7 @@ html {
   .table tr th:last-child {
     /* width: 10%; */
     @apply w-[10%]
-  }
-  
+  } 
 
 }
 

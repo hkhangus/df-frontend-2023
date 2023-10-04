@@ -150,19 +150,19 @@ export default function Home() {
       {isAddModalOpen ? (
         <ModalAdd  books={books} setModalAddOpen={setAddModalOpen} setBooks={setBooks}/>
       ) : null}
-        {/* 
+        
       <ModalDelete
-        openModalDelete={openModalDelete}
-        setModalDelete={setModalDelete}
+        openModalDelete={isDeleteModalOpen}
+        setModalDeleteOpen={setDeleteModalOpen}
         book={deleteBook}
         handleDelete={(item: Book) => 
         {
           setBooks(books.filter((book) => book.id !== item.id))
-          if (resultSearchBooks.includes(deleteBook)) {
-            setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
-          }
+          // if (resultSearchBooks.includes(deleteBook)) {
+          //   setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
+          // }
         }}
-      /> */}
+      />
     </>
   )
 }

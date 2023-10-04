@@ -26,7 +26,7 @@ export default function LineBook({
       <td>{book.author}</td>
       <td>{book.topic}</td>
       <td className="delete-click">
-        <button className=" border-r-2 border-solid border-red-500 pr-2 text-red-500 underline">
+        <button className=" border-r-2 border-solid border-red-500 pr-2 text-red-500 underline" onClick={(e)=>handleOpen(e,book)}>
           Delete
         </button>
         <button className="pl-2 text-red-500 underline">View</button>

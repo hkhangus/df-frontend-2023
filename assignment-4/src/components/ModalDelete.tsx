@@ -4,14 +4,14 @@ import { Book } from '../types'
 interface ModalDeleteProps{
   book: Book,
   openModalDelete: boolean,
-  setModalDelete: Dispatch<SetStateAction<boolean>>,
+  setModalDeleteOpen: Dispatch<SetStateAction<boolean>>,
   handleDelete: (item: Book)=>void,
 }
 
 
-export default function ModalDelete({ book, openModalDelete, setModalDelete, handleDelete }: ModalDeleteProps) {
+export default function ModalDelete({ book, openModalDelete, setModalDeleteOpen, handleDelete }: ModalDeleteProps) {
     function closeModal() {
-      setModalDelete(false)
+      setModalDeleteOpen(false)
     }  
     
     function clickDelete(e,handleDelete: Function,setModalDelete:Dispatch<SetStateAction<boolean>>,book: Book){
@@ -31,7 +31,7 @@ export default function ModalDelete({ book, openModalDelete, setModalDelete, han
           </h2>
           <div className="form__content delete-item">Do you want to delete {book.name} book?</div>
           <div className="form__btn">
-            <button className="btn-delete" onClickCapture={(e) => clickDelete(e,handleDelete,setModalDelete,book)}>Delete</button>
+            <button className="btn-delete" onClickCapture={(e) => clickDelete(e,handleDelete,setModalDeleteOpen,book)}>Delete</button>
             <button className="btn btn-cancel" onClick={closeModal}>
               Cancel
             </button>

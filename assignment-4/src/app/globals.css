@@ -12,7 +12,7 @@ html {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 62.5%;
   line-height: 1.6rem;
 }
@@ -23,51 +23,92 @@ html {
 
 /* MAIN */
 .app {
-  overflow: hidden; 
+  overflow: hidden;
   margin: 0 20px;
 }
 
-@layer components{
+@layer components {
   .btn-primary {
-    @apply bg-red-500 p-4 text-white rounded-lg
+    @apply rounded-lg bg-red-500 p-4 text-white;
   }
-  
+
   .table__content {
     @apply w-full border-collapse;
   }
-  
-  table, thead, td, th {
-    @apply text-left py-4 px-2
-  }
-  
+
   table,
-  tr > * {    
-    @apply bg-stone-100 border-solid border-2 border-zinc-400 text-xl text-left
+  thead,
+  td,
+  th {
+    @apply px-2 py-4 text-left;
   }
-  
-  thead {    
-    @apply font-bold
+
+  table,
+  tr > * {
+    @apply border-2 border-solid border-zinc-400 bg-stone-100 text-left text-xl;
   }
-  
+
+  thead {
+    @apply font-bold;
+  }
+
   .table tr th:first-child {
     /* width: 45%; */
-    @apply w-[45%]
+    @apply w-[45%];
   }
-  
+
   .table tr th:nth-child(2) {
     /* width: 30%; */
-    @apply w-[30%]
+    @apply w-[30%];
   }
-  
+
   .table tr th:nth-child(3) {
     /* width: 15%; */
-    @apply w-[15%]
+    @apply w-[15%];
   }
-  
+
   .table tr th:last-child {
     /* width: 10%; */
-    @apply w-[10%]
-  } 
+    @apply w-[10%];
+  }
 
+  .modal {
+    @apply fixed inset-0 bg-zinc-500 bg-opacity-75 transition-opacity;
+  }
+
+  .form-wrapper {
+    @apply flex h-screen;
+  }
+
+  .close {
+    @apply absolute top-0 right-0 h-16 w-16
+  }
+
+  .form {
+    @apply relative m-auto flex h-2/4 w-2/5 flex-col bg-white text-2xl border-2 border-zinc-400;
+  }
+
+  .add-form {
+    @apply p-8 justify-evenly;
+  }
+
+  .form-header {
+    @apply font-bold;
+  }
+
+  .input-wrap {
+    @apply py-2;
+  }
+
+  .input-header{
+    @apply text-gray-500 font-bold text-xl
+  }
+
+  .input-wrap input, .input-wrap select {
+    @apply w-full border-solid border-2 rounded-md border-zinc-400 h-12
+  }
+
+  input[type=text], select {  
+    @apply px-2 box-border
+  }
 }
-

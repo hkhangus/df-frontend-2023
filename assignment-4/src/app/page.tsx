@@ -62,28 +62,44 @@ export default function Home() {
 
   const [books, setBooks] = useState(DEFAULT_BOOK)
 
-  
-  const [ isAddModalOpen, setAddModalOpen ] = useState(false)
+  const [isAddModalOpen, setAddModalOpen] = useState(false)
   // Deletebook
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
   const [deleteBook, setDeleteBook] = useState(books[1])
+
+  // For search book
+  const [isSearch, setIsSearch] = useState<boolean>(false)
+  const [searchValue, setSeachValue] = useState<string>('')
+  const [resultSearchBooks, setResultBooks] = useState<BookList>(books)
 
   // useEffect(() => )
 
   // const books = DEFAULT_BOOK
 
+  function handleSearch(e) {
+    setSeachValue(e.target.value)
+    if (e.target.value === '') {
+      setIsSearch(false)
+      return
+    }
+    setIsSearch(true)
+    setResultBooks(
+      books.filter((book) => book.name.toLowerCase().includes(searchValue)),
+    )
+  }
+
   return (
     <>
       <div className="app__container bg-color h-screen w-full bg-zinc-200">
         <div className="control flex justify-between p-8 text-lg">
-          <label htmlFor="search" className=" w-150">
+          <label htmlFor="search" className=" w-15 h-12">
             <input
               type="search"
-              // value={searchValue}
+              value={searchValue}
               name="search"
               className="search h-full w-full rounded-xl border-2 border-solid border-zinc-400"
               placeholder="Search books"
-              // onChange={(e) => handleSearch(e)}
+              onChange={(e) => handleSearch(e)}
             />
           </label>
           <Button
@@ -129,9 +145,21 @@ export default function Home() {
                   <button className="pl-2 text-red-500">View</button>
                 </td>
               </tr> */}
-              {books.map((book) => (
-                <LineBook book={book} setModalDeleteOpen={setDeleteModalOpen} setDeleteBook={setDeleteBook}/>
-              ))}
+              {isSearch
+                ? resultSearchBooks.map((book) => (
+                    <LineBook
+                      book={book}
+                      setModalDeleteOpen={setDeleteModalOpen}
+                      setDeleteBook={setDeleteBook}
+                    />
+                  ))
+                : books.map((book) => (
+                    <LineBook
+                      book={book}
+                      setModalDeleteOpen={setDeleteModalOpen}
+                      setDeleteBook={setDeleteBook}
+                    />
+                  ))}
             </tbody>
           </table>
         </div>
@@ -148,19 +176,22 @@ export default function Home() {
       </div>
 
       {isAddModalOpen ? (
-        <ModalAdd  books={books} setModalAddOpen={setAddModalOpen} setBooks={setBooks}/>
+        <ModalAdd
+          books={books}
+          setModalAddOpen={setAddModalOpen}
+          setBooks={setBooks}
+        />
       ) : null}
-        
+
       <ModalDelete
         openModalDelete={isDeleteModalOpen}
         setModalDeleteOpen={setDeleteModalOpen}
         book={deleteBook}
-        handleDelete={(item: Book) => 
-        {
+        handleDelete={(item: Book) => {
           setBooks(books.filter((book) => book.id !== item.id))
-          // if (resultSearchBooks.includes(deleteBook)) {
-          //   setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
-          // }
+          if (isSearch && resultSearchBooks.includes(deleteBook)) {
+            setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
+          }
         }}
       />
     </>

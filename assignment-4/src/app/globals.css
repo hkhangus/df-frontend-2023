@@ -112,7 +112,7 @@ html {
     @apply h-12 w-full rounded-md border-2 border-solid border-zinc-400;
   }
 
-  input[type='text'],
+  input[type='text'], input[type='search'],
   select {
     @apply box-border px-2;
   }

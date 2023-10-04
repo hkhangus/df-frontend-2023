@@ -72,6 +72,8 @@ html {
     @apply w-[10%];
   }
 
+
+  /* MODAL */
   .modal {
     @apply fixed inset-0 bg-zinc-500 bg-opacity-75 transition-opacity;
   }
@@ -81,15 +83,16 @@ html {
   }
 
   .close {
-    @apply absolute top-0 right-0 h-16 w-16
+    @apply absolute right-0 top-0 h-16 w-16;
   }
 
   .form {
-    @apply relative m-auto flex h-2/4 w-2/5 flex-col bg-white text-2xl border-2 border-zinc-400;
+    @apply relative m-auto flex  flex-col border-2 border-zinc-400 bg-white text-2xl;
   }
 
+  /* ADD MODAL */
   .add-form {
-    @apply p-8 justify-evenly;
+    @apply justify-evenly p-8 h-2/4 w-2/5;
   }
 
   .form-header {
@@ -100,15 +103,22 @@ html {
     @apply py-2;
   }
 
-  .input-header{
-    @apply text-gray-500 font-bold text-xl
+  .input-header {
+    @apply text-xl font-bold text-gray-500;
   }
 
-  .input-wrap input, .input-wrap select {
-    @apply w-full border-solid border-2 rounded-md border-zinc-400 h-12
+  .input-wrap input,
+  .input-wrap select {
+    @apply h-12 w-full rounded-md border-2 border-solid border-zinc-400;
   }
 
-  input[type=text], select {  
-    @apply px-2 box-border
+  input[type='text'],
+  select {
+    @apply box-border px-2;
+  }
+
+  /* DELETE MODAL */
+  .delete-form {
+    @apply flex justify-around items-center h-1/4 w-2/4
   }
 }

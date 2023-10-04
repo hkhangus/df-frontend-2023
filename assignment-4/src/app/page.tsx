@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useMemo } from 'react'
 import { useLocalStorage } from 'usehooks-ts'
 // import Image from 'next/image'
 import { Book, BookList } from '../types'
-import { Button, LineBook, ModalAdd, ModalDelete } from '../components'
+import { Button, LineBook, ModalAdd, ModalDelete, Pagination } from '../components'
 
 const DEFAULT_BOOK: BookList = [
   {
@@ -58,6 +58,9 @@ const DEFAULT_BOOK: BookList = [
 ]
 
 export default function Home() {
+
+  const PAGE_SIZE = 5
+
   // const [books, setBooks] = useLocalStorage('books', DEFAULT_BOOK)
 
   const [books, setBooks] = useState(DEFAULT_BOOK)
@@ -71,6 +74,15 @@ export default function Home() {
   const [isSearch, setIsSearch] = useState<boolean>(false)
   const [searchValue, setSeachValue] = useState<string>('')
   const [resultSearchBooks, setResultBooks] = useState<BookList>(books)
+
+  const [page, setPage] = useState<number>(1)
+
+  const displayBook = useMemo<BookList>(() => {
+    const firstPageIndex = (page - 1) * PAGE_SIZE
+    const lastPageIndex = firstPageIndex + PAGE_SIZE
+    return books.slice(firstPageIndex, lastPageIndex)
+  }, [page, books])
+
 
   // useEffect(() => )
 
@@ -86,6 +98,10 @@ export default function Home() {
     setResultBooks(
       books.filter((book) => book.name.toLowerCase().includes(searchValue)),
     )
+  }
+
+  const handlePageChange = (page: number) => {
+    setPage(page)
   }
 
   return (
@@ -153,7 +169,7 @@ export default function Home() {
                       setDeleteBook={setDeleteBook}
                     />
                   ))
-                : books.map((book) => (
+                : displayBook.map((book) => (
                     <LineBook
                       book={book}
                       setModalDeleteOpen={setDeleteModalOpen}
@@ -163,16 +179,17 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-        {/* {!isSearch ? (
+
+        {!isSearch ? (
           <div className="pagination__wrapper">
             <Pagination
               totalItems={books.length}
-              itemsPerPage={PageSize}
+              itemsPerPage={PAGE_SIZE}
               currentPage={page}
               onPageChange={handlePageChange}
             />
           </div>
-        ) : null} */}
+        ) : null}
       </div>
 
       {isAddModalOpen ? (

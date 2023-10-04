@@ -2,7 +2,6 @@
   --color-primary: #d04d4dfd;
 }
 
-
 .pagination__wrapper {
     padding-top: 16px;
     display: flex;
@@ -20,7 +19,7 @@
     cursor: pointer;
     margin: 0 5px;
     padding: 4px 12px;
-    background-color: var(--color-background);
+    /* background-color: var(--color-background); */
     border: 1px solid #9facba;
     color: var(--color-text);
     user-select: none;
@@ -31,7 +30,8 @@
   
   .pagination a:hover {
     background-color: var(--color-primary);
-    color: var(--color-background);
+    font-weight: bold;
+    color: white;
   }
   
   .pagination__link--active a {

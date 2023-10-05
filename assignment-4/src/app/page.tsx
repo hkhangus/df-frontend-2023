@@ -6,7 +6,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import { Book, BookList } from '../types'
 import { Button, LineBook, ModalAdd, ModalDelete, Pagination } from '../components'
 
-const DEFAULT_BOOK: BookList = [
+export const DEFAULT_BOOK: BookList = [
   {
     id: 1,
     name: 'Refactoring',

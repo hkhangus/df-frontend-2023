@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { Dispatch, SetStateAction } from 'react'
 import { Book } from '../types'
 
@@ -29,7 +30,9 @@ export default function LineBook({
         <button className=" border-r-2 border-solid border-red-500 pr-2 text-red-500 underline" onClick={(e)=>handleOpen(e,book)}>
           Delete
         </button>
-        <button className="pl-2 text-red-500 underline">View</button>
+        <button className="pl-2 text-red-500 underline">
+          <Link href={`${book.id}`}>View</Link>
+          </button>
       </td>
     </tr>
   )

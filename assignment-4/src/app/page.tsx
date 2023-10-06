@@ -91,6 +91,7 @@ export default function Home() {
               {isSearch
                 ? resultSearchBooks.map((book) => (
                     <LineBook
+                      key={book.id}
                       book={book}
                       setModalDeleteOpen={setDeleteModalOpen}
                       setDeleteBook={setDeleteBook}
@@ -98,6 +99,7 @@ export default function Home() {
                   ))
                 : displayBook.map((book) => (
                     <LineBook
+                      key={book.id}
                       book={book}
                       setModalDeleteOpen={setDeleteModalOpen}
                       setDeleteBook={setDeleteBook}

@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { useParams, notFound, redirect, useRouter } from 'next/navigation'
-import { ModalDelete } from '../../components'
 import { useState } from 'react'
+import { useParams, notFound, useRouter } from 'next/navigation'
+import { ModalDelete } from '../../components'
 import { useBook } from '../../context/BookContext'
 
 export default function BookDetail() {
@@ -25,7 +25,7 @@ export default function BookDetail() {
 
   return (
     <div className="app__container bg-color h-screen w-full bg-zinc-200 p-6 ">
-      <Link href={'./'} className="  mb-10 block text-xl text-red-500">
+      <Link href="./" className="  mb-10 block text-xl text-red-500">
         Back
       </Link>
       <h1 className=" mb-10 text-2xl font-bold">{bookDetail?.name}</h1>

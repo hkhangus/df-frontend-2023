@@ -20,7 +20,7 @@ export default function ModalDelete({
 
   function clickDelete(
     e,
-    handleDelete: Function,
+    handleDelete: (book: Book) => void,
     setModalDelete: Dispatch<SetStateAction<boolean>>,
     book: Book,
   ) {

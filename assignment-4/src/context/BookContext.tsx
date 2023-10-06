@@ -25,7 +25,7 @@ export const useBook = () => {
 
 export default function BookProvider(props) {
   const [books, setBookList] = useLocalStorage<BookList>(
-    'bookList',
+    'books',
     DEFAULT_BOOK,
   )
 

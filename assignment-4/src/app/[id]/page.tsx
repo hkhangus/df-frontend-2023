@@ -1,17 +1,21 @@
 'use client'
 
 import Link from 'next/link'
-import { useParams, notFound, redirect } from 'next/navigation'
+import { useParams, notFound, redirect, useRouter } from 'next/navigation'
 import { Button, ModalDelete } from '../../components'
 
 import { DEFAULT_BOOK } from '../page'
-import NotFound from '../not-found'
 import { useState } from 'react'
+
+
 
 export default function BookDetail() {
 
+
+
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
 
+  const router = useRouter()
   const params = useParams()
 
   const bookDetail = DEFAULT_BOOK.find((book) => `${book.id}` === params.id)
@@ -21,6 +25,7 @@ export default function BookDetail() {
   function handleOpen(e, book) {
     e.preventDefault()
     setDeleteModalOpen(true)
+    redirect('./')
     // setDeleteBook(book)
   }
 
@@ -53,9 +58,8 @@ export default function BookDetail() {
         handleDelete={(item) => {
           // setBooks(books.filter((book) => book.id !== item.id))
           console.log('redirect')          
-          redirect('./')
-          
-        }}
+          router.push('/')
+        }} 
       />
       </div>
     </>

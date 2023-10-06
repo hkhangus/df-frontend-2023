@@ -1,18 +1,17 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { Book, BookList } from '../types'
+import { useBook } from '../context/BookContext'
 
 function generateRandomString() {
   return Math.random().toString(36).substring(2, 15)
 }
 
 interface ModalAddProps {
-  books: BookList
   setModalAddOpen: Dispatch<SetStateAction<boolean>>
-  setBooks: Dispatch<SetStateAction<BookList>>
+  setBooks
 }
 
 export default function ModalAdd({
-  books,
   setModalAddOpen,
   setBooks,
 }: ModalAddProps) {
@@ -27,7 +26,7 @@ export default function ModalAdd({
       author,
       topic,
     }
-    setBooks([...books, newBook])
+    setBooks(newBook)
     setName('')
     setAuthor('')
     setTopic('Programming')

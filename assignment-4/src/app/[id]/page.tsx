@@ -2,16 +2,16 @@
 
 import Link from 'next/link'
 import { useParams, notFound, redirect, useRouter } from 'next/navigation'
-import { Button, ModalDelete } from '../../components'
-
-import { DEFAULT_BOOK } from '../page'
+import { ModalDelete } from '../../components'
+import { DEFAULT_BOOK } from '../../data/data'
 import { useState } from 'react'
+import { useBook } from '../../context/BookContext'
 
 
 
 export default function BookDetail() {
 
-
+  const {deleteBookContext} = useBook()
 
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
 
@@ -22,11 +22,9 @@ export default function BookDetail() {
 
   if (!bookDetail) return notFound()
 
-  function handleOpen(e, book) {
+  function handleOpen(e) {
     e.preventDefault()
     setDeleteModalOpen(true)
-    redirect('./')
-    // setDeleteBook(book)
   }
 
   return (
@@ -46,7 +44,7 @@ export default function BookDetail() {
 
         <button
           className="  text-red-500 underline mt-10 text-xl"
-          onClick={(e) => handleOpen(e, bookDetail)}
+          onClick={(e) => handleOpen(e)}
         >
           Delete
         </button>
@@ -56,8 +54,7 @@ export default function BookDetail() {
         setModalDeleteOpen={setDeleteModalOpen}
         book={bookDetail}
         handleDelete={(item) => {
-          // setBooks(books.filter((book) => book.id !== item.id))
-          console.log('redirect')          
+          deleteBookContext(item)
           router.push('/')
         }} 
       />

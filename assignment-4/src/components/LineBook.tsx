@@ -31,7 +31,7 @@ export default function LineBook({
           Delete
         </button>
         <button className="pl-2 text-red-500 underline">
-          <Link href={`${book.id}`}>View</Link>
+          <Link href={`./${book.id}`}>View</Link>
           </button>
       </td>
     </tr>

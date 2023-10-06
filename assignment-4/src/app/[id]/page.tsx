@@ -28,7 +28,6 @@ export default function BookDetail() {
   }
 
   return (
-    <>
       <div className="app__container bg-color h-screen w-full bg-zinc-200 p-6 ">
         <Link href={'./'} className="  text-red-500 text-xl mb-10 block">
           Back
@@ -59,6 +58,5 @@ export default function BookDetail() {
         }} 
       />
       </div>
-    </>
   )
 }

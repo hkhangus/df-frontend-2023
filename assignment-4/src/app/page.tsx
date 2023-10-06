@@ -5,8 +5,6 @@ import { Book, BookList } from '../types'
 import { useBook } from '../context/BookContext'
 import { Button, LineBook, ModalAdd, ModalDelete, Pagination } from '../components'
 
-
-
 export default function Home() {
 
   const PAGE_SIZE = 5
@@ -34,12 +32,6 @@ export default function Home() {
     return books.slice(firstPageIndex, lastPageIndex)
   }, [page, books])
 
-
-  useEffect(() => {
-    
-  })
-
-  // const books = DEFAULT_BOOK
 
   function handleSearch(e) {
     setSeachValue(e.target.value)
@@ -125,7 +117,6 @@ export default function Home() {
 
       {isAddModalOpen ? (
         <ModalAdd
-          
           setModalAddOpen={setAddModalOpen}
           setBooks={addBookContext}
         />

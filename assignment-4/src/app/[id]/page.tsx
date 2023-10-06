@@ -11,14 +11,14 @@ import { useBook } from '../../context/BookContext'
 
 export default function BookDetail() {
 
-  const {deleteBookContext} = useBook()
+  const {books,deleteBookContext} = useBook()
 
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
 
   const router = useRouter()
   const params = useParams()
 
-  const bookDetail = DEFAULT_BOOK.find((book) => `${book.id}` === params.id)
+  const bookDetail = books.find((book) => `${book.id}` === params.id)
 
   if (!bookDetail) return notFound()
 
@@ -55,7 +55,7 @@ export default function BookDetail() {
         book={bookDetail}
         handleDelete={(item) => {
           deleteBookContext(item)
-          router.push('/')
+          router.back()
         }} 
       />
       </div>

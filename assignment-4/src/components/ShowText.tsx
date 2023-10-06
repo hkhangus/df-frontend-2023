@@ -1,11 +1,6 @@
 interface ShowTextProps {
-    text: string
+  text: string
 }
-export default function ShowText({text }:ShowTextProps) {
-  
-  return (
-    
-  <div>{text}</div>
-    
-  )
+export default function ShowText({ text }: ShowTextProps) {
+  return <div>{text}</div>
 }

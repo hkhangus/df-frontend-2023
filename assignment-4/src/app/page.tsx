@@ -1,16 +1,21 @@
 'use client'
 
-import React, { useEffect, useState,useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Book, BookList } from '../types'
 import { useBook } from '../context/BookContext'
-import { Button, LineBook, ModalAdd, ModalDelete, Pagination } from '../components'
+import {
+  Button,
+  LineBook,
+  ModalAdd,
+  ModalDelete,
+  Pagination,
+} from '../components'
 
 export default function Home() {
-
   const PAGE_SIZE = 5
 
   // const [books, setBooks] = useLocalStorage('books', DEFAULT_BOOK)
-  const {books, deleteBookContext, addBookContext} = useBook()
+  const { books, deleteBookContext, addBookContext } = useBook()
 
   // const [books, setBooks] = useState(DEFAULT_BOOK)
 
@@ -31,7 +36,6 @@ export default function Home() {
     const lastPageIndex = firstPageIndex + PAGE_SIZE
     return books.slice(firstPageIndex, lastPageIndex)
   }, [page, books])
-
 
   function handleSearch(e) {
     setSeachValue(e.target.value)
@@ -116,10 +120,7 @@ export default function Home() {
       </div>
 
       {isAddModalOpen ? (
-        <ModalAdd
-          setModalAddOpen={setAddModalOpen}
-          setBooks={addBookContext}
-        />
+        <ModalAdd setModalAddOpen={setAddModalOpen} setBooks={addBookContext} />
       ) : null}
 
       <ModalDelete
@@ -129,7 +130,9 @@ export default function Home() {
         handleDelete={(item: Book) => {
           deleteBookContext(item)
           if (isSearch && resultSearchBooks.includes(deleteBook)) {
-            setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
+            setResultBooks(
+              resultSearchBooks.filter((book) => book.id !== item.id),
+            )
           }
         }}
       />

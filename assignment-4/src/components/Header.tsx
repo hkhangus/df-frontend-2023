@@ -1,10 +1,10 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 export default function Header() {
   return (
     <header className=" border-b-2 border-black">
-      <nav className="navbar flex w-full justify-between items-center p-8">
-        <Link href="./" id="bookstore" className=" font-bold text-5xl">
+      <nav className="navbar flex w-full items-center justify-between p-8">
+        <Link href="./" id="bookstore" className=" text-5xl font-bold">
           Bookstore
         </Link>
         <div className="flex items-center gap-x-2">

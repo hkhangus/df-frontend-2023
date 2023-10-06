@@ -1,69 +1,20 @@
 'use client'
 
 import React, { useEffect, useState,useMemo } from 'react'
-import { useLocalStorage } from 'usehooks-ts'
-// import Image from 'next/image'
 import { Book, BookList } from '../types'
+import { useBook } from '../context/BookContext'
 import { Button, LineBook, ModalAdd, ModalDelete, Pagination } from '../components'
 
-const DEFAULT_BOOK: BookList = [
-  {
-    id: 1,
-    name: 'Refactoring',
-    author: 'Martin Fowler',
-    topic: 'Programming',
-  },
-  {
-    id: 2,
-    name: 'Design Data-Intensive Applications',
-    author: 'Martin Kleppman',
-    topic: 'Database',
-  },
-  {
-    id: 3,
-    name: 'The Phoenix Project',
-    author: 'Gene Kim',
-    topic: 'DevOps',
-  },
-  {
-    id: 4,
-    name: 'The Pragmatic Programmer: Your Journey to Mastery',
-    author: 'Andrew Hunt, David Thomas',
-    topic: 'Software Development',
-  },
-  {
-    id: 5,
-    name: 'Effective Java',
-    author: 'Joshua Bloch',
-    topic: 'Java Programming',
-  },
-  {
-    id: 6,
-    name: 'To Kill a Mockingbird',
-    author: 'Harper Lee',
-    topic: 'Literature',
-  },
-  {
-    id: 7,
-    name: '1984',
-    author: 'George Orwell',
-    topic: 'Science Fiction',
-  },
-  {
-    id: 8,
-    name: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    topic: 'Literature',
-  },
-]
+
 
 export default function Home() {
 
   const PAGE_SIZE = 5
 
   // const [books, setBooks] = useLocalStorage('books', DEFAULT_BOOK)
+  const {books, deleteBookContext, addBookContext} = useBook()
 
-  const [books, setBooks] = useState(DEFAULT_BOOK)
+  // const [books, setBooks] = useState(DEFAULT_BOOK)
 
   const [isAddModalOpen, setAddModalOpen] = useState(false)
   // Deletebook
@@ -84,7 +35,9 @@ export default function Home() {
   }, [page, books])
 
 
-  // useEffect(() => )
+  useEffect(() => {
+    
+  })
 
   // const books = DEFAULT_BOOK
 
@@ -139,28 +92,6 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
-              {/* <tr>
-                <td>dsadas</td>
-                <td>sdada</td>
-                <td>Programming</td>
-                <td className="delete-click">
-                  <button className=" border-r-2 border-solid border-red-500 pr-2 text-red-500">
-                    Delete
-                  </button>
-                  <button className="pl-2 text-red-500">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Refactoring</td>
-                <td>Martin Fowler</td>
-                <td>Programming</td>
-                <td className="delete-click">
-                  <button className=" border-r-2 border-solid border-red-500 pr-2 text-red-500">
-                    Delete
-                  </button>
-                  <button className="pl-2 text-red-500">View</button>
-                </td>
-              </tr> */}
               {isSearch
                 ? resultSearchBooks.map((book) => (
                     <LineBook
@@ -194,9 +125,9 @@ export default function Home() {
 
       {isAddModalOpen ? (
         <ModalAdd
-          books={books}
+          
           setModalAddOpen={setAddModalOpen}
-          setBooks={setBooks}
+          setBooks={addBookContext}
         />
       ) : null}
 
@@ -205,7 +136,7 @@ export default function Home() {
         setModalDeleteOpen={setDeleteModalOpen}
         book={deleteBook}
         handleDelete={(item: Book) => {
-          setBooks(books.filter((book) => book.id !== item.id))
+          deleteBookContext(item)
           if (isSearch && resultSearchBooks.includes(deleteBook)) {
             setResultBooks(resultSearchBooks.filter((book) => book.id !== item.id))
           }

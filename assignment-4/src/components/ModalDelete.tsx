@@ -24,9 +24,9 @@ export default function ModalDelete({
     setModalDelete: Dispatch<SetStateAction<boolean>>,
     book: Book,
   ) {
-    e.preventDefault()
-    handleDelete(book)
+    e.preventDefault()    
     setModalDelete(false)
+    handleDelete(book)
   }
 
   return openModalDelete ? (
@@ -47,7 +47,7 @@ export default function ModalDelete({
           <div className="form__btn flex justify-between w-1/4">
             <button
               className="btn-delete"
-              onClickCapture={(e) =>
+              onClick={(e) =>
                 clickDelete(e, handleDelete, setModalDeleteOpen, book)
               }
             >

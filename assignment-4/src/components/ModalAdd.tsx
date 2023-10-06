@@ -11,10 +11,7 @@ interface ModalAddProps {
   setBooks
 }
 
-export default function ModalAdd({
-  setModalAddOpen,
-  setBooks,
-}: ModalAddProps) {
+export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
   const [name, setName] = useState<string>('')
   const [author, setAuthor] = useState<string>('')
   const [topic, setTopic] = useState<string>('Programming')

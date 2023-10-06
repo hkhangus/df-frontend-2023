@@ -24,7 +24,7 @@ export default function ModalDelete({
     setModalDelete: Dispatch<SetStateAction<boolean>>,
     book: Book,
   ) {
-    e.preventDefault()    
+    e.preventDefault()
     setModalDelete(false)
     handleDelete(book)
   }
@@ -40,11 +40,11 @@ export default function ModalDelete({
             </button>
           </h2>
           <div className="form__content delete-item w-full text-center">
-            Do you want to delete 
-            <span className=' text-red-500'> {book.name} </span>
-             book?
+            Do you want to delete
+            <span className=" text-red-500"> {book.name} </span>
+            book?
           </div>
-          <div className="form__btn flex justify-between w-1/4">
+          <div className="form__btn flex w-1/4 justify-between">
             <button
               className="btn-delete"
               onClick={(e) =>

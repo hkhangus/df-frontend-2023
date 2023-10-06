@@ -17,17 +17,14 @@ export const useBook = () => {
   const currentContext = useContext(BookContext)
 
   if (!currentContext) {
-        throw new Error('Not found BookContext')
+    throw new Error('Not found BookContext')
   }
 
   return currentContext
 }
 
 export default function BookProvider(props) {
-  const [books, setBookList] = useLocalStorage<BookList>(
-    'books',
-    DEFAULT_BOOK,
-  )
+  const [books, setBookList] = useLocalStorage<BookList>('books', DEFAULT_BOOK)
 
   const handleDelete = (deletebook: Book) => {
     setBookList(books.filter((book) => book !== deletebook))

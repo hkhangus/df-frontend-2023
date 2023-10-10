@@ -8,24 +8,30 @@ function generateRandomString() {
 interface ModalEditProps {
   setModalEditOpen: Dispatch<SetStateAction<boolean>>
   // setBooks,
-  book: Book
+  book: Book,
+  editBook
 }
 
-export default function ModalEdit({ setModalEditOpen, book }: ModalEditProps) {
+export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEditProps) {
   const [name, setName] = useState<string>(book.name)
   const [author, setAuthor] = useState<string>(book.author)
   const [topic, setTopic] = useState<string>(book.topic)
 
   function handleEditBook() {
-    
-    // setBooks(newBook)
-    
+    const newBook :Book = {
+      ...book,
+      name: name,
+      author: author,
+      topic: topic
+    }
+    editBook(book,newBook)
+    setModalEditOpen(false)
   }
 
   return (
-    <div className="modal modal-Edit">
+    <div className="modal modal-add">
       <div className="form-wrapper">
-        <div className="form Edit-form">
+        <div className="form add-form">
           <h2 className="form-header">
             Edit book
             <button
@@ -85,7 +91,7 @@ export default function ModalEdit({ setModalEditOpen, book }: ModalEditProps) {
                   handleEditBook()
                 }}
               >
-                Create
+                Edit
               </button>
             </div>
           </form>

@@ -8,6 +8,8 @@ interface LineBookProps {
   book: Book
   setModalDeleteOpen: Dispatch<SetStateAction<boolean>>
   setDeleteBook: Dispatch<SetStateAction<Book>>
+  setModalEditOpen: Dispatch<SetStateAction<boolean>>
+  setEditBook: Dispatch<SetStateAction<Book>>
   
 }
 
@@ -15,6 +17,8 @@ export default function LineBook({
   book,
   setModalDeleteOpen,
   setDeleteBook,
+  setModalEditOpen,
+  setEditBook
 }: LineBookProps) {
   function handleOpenDelete(e, book) {
     e.preventDefault()
@@ -23,7 +27,9 @@ export default function LineBook({
   }
 
   function handleOpenEdit(e,book){
-    
+    e.preventDefault()
+    setModalEditOpen(true)
+    setEditBook(book)
   }
 
   return (

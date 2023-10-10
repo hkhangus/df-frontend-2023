@@ -8,6 +8,7 @@ import {
   LineBook,
   ModalAdd,
   ModalDelete,
+  ModalEdit,
   Pagination,
 } from '../components'
 
@@ -15,7 +16,7 @@ export default function Home() {
   const PAGE_SIZE = 5
 
   // const [books, setBooks] = useLocalStorage('books', DEFAULT_BOOK)
-  const { books, deleteBookContext, addBookContext } = useBook()
+  const { books, deleteBookContext, addBookContext, editBookContext } = useBook()
 
   // const [books, setBooks] = useState(DEFAULT_BOOK)
 
@@ -23,6 +24,9 @@ export default function Home() {
   // Deletebook
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
   const [deleteBook, setDeleteBook] = useState(books[1])
+  // Editbook
+  const [isEditModalOpen, setEditModalOpen] = useState(false)
+  const [editBook, setEditBook] = useState(books[1])
 
   // For search book
   const [isSearch, setIsSearch] = useState<boolean>(false)
@@ -95,6 +99,8 @@ export default function Home() {
                       book={book}
                       setModalDeleteOpen={setDeleteModalOpen}
                       setDeleteBook={setDeleteBook}
+                      setModalEditOpen={setEditModalOpen}
+                      setEditBook={setEditBook}
                     />
                   ))
                 : displayBook.map((book) => (
@@ -103,6 +109,9 @@ export default function Home() {
                       book={book}
                       setModalDeleteOpen={setDeleteModalOpen}
                       setDeleteBook={setDeleteBook}
+                      setModalEditOpen={setEditModalOpen}
+                      setEditBook={setEditBook}
+
                     />
                   ))}
             </tbody>
@@ -138,6 +147,9 @@ export default function Home() {
           }
         }}
       />
+
+      {isEditModalOpen ? (<ModalEdit setModalEditOpen={setEditModalOpen} book={editBook} editBook={editBookContext}/>) : null}
+      
     </>
   )
 }

@@ -9,6 +9,7 @@ interface BookContextType {
   books: BookList
   deleteBookContext: (deletebook: Book) => void
   addBookContext: (book: Book) => void
+  editBookContext: (oldBook: Book, newBook: Book) => void
 }
 
 const BookContext = createContext<BookContextType | null>(null)
@@ -34,13 +35,23 @@ export default function BookProvider(props) {
     setBookList([...books, book])
   }
 
+  const handleEdit = (oldBook: Book, newBook: Book) => {
+    setBookList(
+      books.map((book) => {
+        if (book === oldBook) return newBook
+        else return book
+      }),
+    )
+  }
+
   const value = useMemo(
     () => ({
       books,
       deleteBookContext: handleDelete,
       addBookContext: handleAdd,
+      editBookContext: handleEdit
     }),
-    [books, handleDelete, handleAdd],
+    [books, handleDelete, handleAdd, handleEdit],
   )
 
   return <BookContext.Provider value={value} {...props} />

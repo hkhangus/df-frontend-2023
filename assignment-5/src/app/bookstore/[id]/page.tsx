@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useParams, notFound, useRouter } from 'next/navigation'
-import { ModalDelete } from '../../components'
-import { useBook } from '../../context/BookContext'
+import { ModalDelete } from '../../../components'
+import { useBook } from '../../../context/BookContext'
 
 export default function BookDetail() {
   const { books, deleteBookContext } = useBook()

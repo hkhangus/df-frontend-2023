@@ -16,7 +16,8 @@ export default function BookHome() {
   const PAGE_SIZE = 5
 
   // const [books, setBooks] = useLocalStorage('books', DEFAULT_BOOK)
-  const { books, deleteBookContext, addBookContext, editBookContext } = useBook()
+  const { books, deleteBookContext, addBookContext, editBookContext } =
+    useBook()
 
   // const [books, setBooks] = useState(DEFAULT_BOOK)
 
@@ -111,7 +112,6 @@ export default function BookHome() {
                       setDeleteBook={setDeleteBook}
                       setModalEditOpen={setEditModalOpen}
                       setEditBook={setEditBook}
-
                     />
                   ))}
             </tbody>
@@ -148,8 +148,13 @@ export default function BookHome() {
         }}
       />
 
-      {isEditModalOpen ? (<ModalEdit setModalEditOpen={setEditModalOpen} book={editBook} editBook={editBookContext}/>) : null}
-      
+      {isEditModalOpen ? (
+        <ModalEdit
+          setModalEditOpen={setEditModalOpen}
+          book={editBook}
+          editBook={editBookContext}
+        />
+      ) : null}
     </>
   )
 }

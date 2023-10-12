@@ -49,7 +49,7 @@ export default function BookProvider(props) {
       books,
       deleteBookContext: handleDelete,
       addBookContext: handleAdd,
-      editBookContext: handleEdit
+      editBookContext: handleEdit,
     }),
     [books, handleDelete, handleAdd, handleEdit],
   )

@@ -10,7 +10,9 @@ function generateRandomString() {
 
 const BookSchema = z.object({
   name: z.string().min(5, { message: 'Must be 5 or more characters long' }),
-  author: z.string().regex(/^[a-zA-Z\s]+$/, {message: "Only letters and spaces"}),
+  author: z
+    .string()
+    .regex(/^[a-zA-Z\s]+$/, { message: 'Only letters and spaces' }),
 })
 
 type BookSchemaType = z.infer<typeof BookSchema>
@@ -18,11 +20,15 @@ type BookSchemaType = z.infer<typeof BookSchema>
 interface ModalEditProps {
   setModalEditOpen: Dispatch<SetStateAction<boolean>>
   // setBooks,
-  book: Book,
+  book: Book
   editBook
 }
 
-export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEditProps) {
+export default function ModalEdit({
+  setModalEditOpen,
+  book,
+  editBook,
+}: ModalEditProps) {
   const {
     formState: { errors },
     watch,
@@ -51,15 +57,14 @@ export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEdi
 
   const handleEditBook = handleSubmit(async (formValues) => {
     console.log(formValues)
-    if (!errors.author && !errors.name)
-    {
+    if (!errors.author && !errors.name) {
       const newBook: Book = {
         ...book,
         name: formValues.name,
         author: formValues.author,
-        topic: topic
+        topic: topic,
       }
-      editBook(book,newBook)
+      editBook(book, newBook)
       setModalEditOpen(false)
     }
   })
@@ -82,7 +87,7 @@ export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEdi
             <div className="input-wrap">
               <h3 className="input-header">Name</h3>
               <input
-                {...register("name")}
+                {...register('name')}
                 className="input"
                 type="text"
                 placeholder="text"
@@ -97,7 +102,7 @@ export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEdi
             <div className="input-wrap">
               <h3 className="input-header">Author</h3>
               <input
-                {...register("author")}
+                {...register('author')}
                 className="input"
                 type="text"
                 placeholder="text"

@@ -6,8 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
 
 const LoginSchema = z.object({
-  email: z.string().email({message:"*Invalid email"}),
-  password: z.string().regex(/^(?=.*[A-Z])(?=.*\W)(?=.*\d)[a-zA-Z0-9\W]{8,}$/,{message: "*Invalid password. Minimum of 8 characters with at least 1 uppercase and 1 symbol"}),
+  email: z.string().email({ message: '*Invalid email' }),
+  password: z
+    .string()
+    .regex(/^(?=.*[A-Z])(?=.*\W)(?=.*\d)[a-zA-Z0-9\W]{8,}$/, {
+      message:
+        '*Invalid password. Minimum of 8 characters with at least 1 uppercase and 1 symbol',
+    }),
 })
 
 type LoginSchemaType = z.infer<typeof LoginSchema>
@@ -27,12 +32,11 @@ export default function Login() {
     resolver: zodResolver(LoginSchema),
   })
 
-  const onSubmit =
-    handleSubmit(async () => {
-      if (!errors.email && !errors.password) {
-        router.push('./bookstore')
-      }
-    })
+  const onSubmit = handleSubmit(async () => {
+    if (!errors.email && !errors.password) {
+      router.push('./bookstore')
+    }
+  })
 
   return (
     <div className=" modal modal-add">
@@ -41,7 +45,7 @@ export default function Login() {
           <div className=" form-header text-4xl text-red-500">
             Login in to Bookstore
           </div>
-          <form action="" id="login" className=' p-10'>
+          <form action="" id="login" className=" p-10">
             <label htmlFor="Email">Email</label>
             <div className="input-wrap">
               <input type="text" required {...register('email')} />

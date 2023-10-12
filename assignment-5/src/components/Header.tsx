@@ -17,7 +17,9 @@ export default function Header() {
             id="avt"
           />
           <span className=" text-lg">John Doe</span>
-          <Link href="/" className=" text-lg underline text-red-500">Log out</Link>
+          <Link href="/" className=" text-lg text-red-500 underline">
+            Log out
+          </Link>
         </div>
       </nav>
     </header>

@@ -11,7 +11,9 @@ function generateRandomString() {
 
 const BookSchema = z.object({
   name: z.string().min(5, { message: 'Must be 5 or more characters long' }),
-  author: z.string().regex(/^[a-zA-Z\s]+$/, {message: "Only letters and spaces"}),
+  author: z
+    .string()
+    .regex(/^[a-zA-Z\s]+$/, { message: 'Only letters and spaces' }),
 })
 
 type BookSchemaType = z.infer<typeof BookSchema>
@@ -39,13 +41,12 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
 
   const onSubmit = handleSubmit(async (formValues) => {
     console.log(formValues)
-    if (!errors.author && !errors.name)
-    {
+    if (!errors.author && !errors.name) {
       const newBook: Book = {
         id: generateRandomString(),
         name: formValues.name,
         author: formValues.author,
-        topic: topic
+        topic: topic,
       }
       setBooks(newBook)
       setTopic('Programming')
@@ -70,7 +71,7 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
             <div className="input-wrap">
               <h3 className="input-header">Name</h3>
               <input
-                {...register("name")}
+                {...register('name')}
                 className="input"
                 type="text"
                 placeholder="text"
@@ -87,7 +88,7 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
                 <h3 className="input-header">Author</h3>
               </label>
               <input
-                {...register("author")}
+                {...register('author')}
                 className="input"
                 type="text"
                 placeholder="text"
@@ -119,10 +120,10 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
                 className="btn btn-create btn-primary float-right"
                 type="submit"
                 form="AddBook"
-                onClick={(e) => {e.preventDefault();onSubmit()}
-                  
-                  
-                }
+                onClick={(e) => {
+                  e.preventDefault()
+                  onSubmit()
+                }}
               >
                 Create
               </button>

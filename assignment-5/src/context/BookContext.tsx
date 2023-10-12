@@ -39,7 +39,7 @@ export default function BookProvider(props) {
     setBookList(
       books.map((book) => {
         if (book === oldBook) return newBook
-        else return book
+        return book
       }),
     )
   }

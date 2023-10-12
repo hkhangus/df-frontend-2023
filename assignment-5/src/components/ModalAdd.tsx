@@ -26,7 +26,6 @@ interface ModalAddProps {
 export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
   const {
     formState: { errors },
-    watch,
     register,
     handleSubmit,
   } = useForm<BookSchemaType>({
@@ -40,13 +39,12 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
   const [topic, setTopic] = useState<string>('Programming')
 
   const onSubmit = handleSubmit(async (formValues) => {
-    console.log(formValues)
     if (!errors.author && !errors.name) {
       const newBook: Book = {
         id: generateRandomString(),
         name: formValues.name,
         author: formValues.author,
-        topic: topic,
+        topic,
       }
       setBooks(newBook)
       setTopic('Programming')
@@ -69,51 +67,53 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
           </h2>
           <form className="form__content" id="AddBook">
             <div className="input-wrap">
-              <h3 className="input-header">Name</h3>
-              <input
-                {...register('name')}
-                className="input"
-                type="text"
-                placeholder="text"
-                id="input-name"
-                name="name"
-                required
-              />
-              {errors.name && (
-                <span className=" text-red-500">{errors.name.message}</span>
-              )}
+              <label htmlFor="input-name">
+                <h3 className="input-header">Name</h3>
+                <input
+                  {...register('name')}
+                  className="input"
+                  type="text"
+                  placeholder="text"
+                  id="input-name"
+                  name="name"
+                  required
+                />
+                {errors.name && (
+                  <span className=" text-red-500">{errors.name.message}</span>
+                )}
+              </label>
             </div>
             <div className="input-wrap">
-              <label htmlFor="author">
+              <label htmlFor="input-author">
                 <h3 className="input-header">Author</h3>
+                <input
+                  {...register('author')}
+                  className="input"
+                  type="text"
+                  placeholder="text"
+                  id="input-author"
+                  name="author"
+                  required
+                />
+                {errors.author && (
+                  <span className=" text-red-500">{errors.author.message}</span>
+                )}
               </label>
-              <input
-                {...register('author')}
-                className="input"
-                type="text"
-                placeholder="text"
-                id="input-author"
-                name="author"
-                required
-              />
-              {errors.author && (
-                <span className=" text-red-500">{errors.author.message}</span>
-              )}
             </div>
             <div className="input-wrap">
-              <label htmlFor="topic">
+              <label htmlFor="input-topic">
                 <h3 className="input-header">Topic</h3>
+                <select
+                  id="input-topic"
+                  name="topic"
+                  value={topic}
+                  onChange={(e) => setTopic(e.target.value)}
+                >
+                  <option value="Programming">Programming</option>
+                  <option value="Databse">Databse</option>
+                  <option value="DevOps">DevOps</option>
+                </select>
               </label>
-              <select
-                id="input-topic"
-                name="topic"
-                value={topic}
-                onChange={(e) => setTopic(e.target.value)}
-              >
-                <option value="Programming">Programming</option>
-                <option value="Databse">Databse</option>
-                <option value="DevOps">DevOps</option>
-              </select>
             </div>
             <div className="form__btn">
               <button

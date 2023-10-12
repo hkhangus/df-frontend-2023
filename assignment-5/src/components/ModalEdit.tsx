@@ -4,10 +4,6 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Book } from '../types'
 
-function generateRandomString() {
-  return Math.random().toString(36).substring(2, 15)
-}
-
 const BookSchema = z.object({
   name: z.string().min(5, { message: 'Must be 5 or more characters long' }),
   author: z
@@ -31,7 +27,6 @@ export default function ModalEdit({
 }: ModalEditProps) {
   const {
     formState: { errors },
-    watch,
     register,
     handleSubmit,
   } = useForm<BookSchemaType>({
@@ -44,25 +39,13 @@ export default function ModalEdit({
 
   const [topic, setTopic] = useState<string>(book.topic)
 
-  // function handleEditBook() {
-  //   const newBook :Book = {
-  //     ...book,
-  //     name: name,
-  //     author: author,
-  //     topic: topic
-  //   }
-  //   editBook(book,newBook)
-  //   setModalEditOpen(false)
-  // }
-
   const handleEditBook = handleSubmit(async (formValues) => {
-    console.log(formValues)
     if (!errors.author && !errors.name) {
       const newBook: Book = {
         ...book,
         name: formValues.name,
         author: formValues.author,
-        topic: topic,
+        topic,
       }
       editBook(book, newBook)
       setModalEditOpen(false)

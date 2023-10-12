@@ -39,7 +39,7 @@ export default function BookProvider(props) {
     setBookList(
       books.map((book) => {
         if (book === oldBook) return newBook
-        else return book
+        return book
       }),
     )
   }
@@ -49,7 +49,7 @@ export default function BookProvider(props) {
       books,
       deleteBookContext: handleDelete,
       addBookContext: handleAdd,
-      editBookContext: handleEdit
+      editBookContext: handleEdit,
     }),
     [books, handleDelete, handleAdd, handleEdit],
   )

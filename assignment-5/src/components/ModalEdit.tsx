@@ -1,32 +1,56 @@
 import { Dispatch, SetStateAction, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Book } from '../types'
 
-function generateRandomString() {
-  return Math.random().toString(36).substring(2, 15)
-}
+const BookSchema = z.object({
+  name: z.string().min(5, { message: 'Must be 5 or more characters long' }),
+  author: z
+    .string()
+    .regex(/^[a-zA-Z\s]+$/, { message: 'Only letters and spaces' }),
+})
+
+type BookSchemaType = z.infer<typeof BookSchema>
 
 interface ModalEditProps {
   setModalEditOpen: Dispatch<SetStateAction<boolean>>
   // setBooks,
-  book: Book,
+  book: Book
   editBook
 }
 
-export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEditProps) {
-  const [name, setName] = useState<string>(book.name)
-  const [author, setAuthor] = useState<string>(book.author)
+export default function ModalEdit({
+  setModalEditOpen,
+  book,
+  editBook,
+}: ModalEditProps) {
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<BookSchemaType>({
+    defaultValues: {
+      name: book.name,
+      author: book.author,
+    },
+    resolver: zodResolver(BookSchema),
+  })
+
   const [topic, setTopic] = useState<string>(book.topic)
 
-  function handleEditBook() {
-    const newBook :Book = {
-      ...book,
-      name: name,
-      author: author,
-      topic: topic
+  const handleEditBook = handleSubmit(async (formValues) => {
+    if (!errors.author && !errors.name) {
+      const newBook: Book = {
+        ...book,
+        name: formValues.name,
+        author: formValues.author,
+        topic,
+      }
+      editBook(book, newBook)
+      setModalEditOpen(false)
     }
-    editBook(book,newBook)
-    setModalEditOpen(false)
-  }
+  })
 
   return (
     <div className="modal modal-add">
@@ -46,8 +70,7 @@ export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEdi
             <div className="input-wrap">
               <h3 className="input-header">Name</h3>
               <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                {...register('name')}
                 className="input"
                 type="text"
                 placeholder="text"
@@ -55,12 +78,14 @@ export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEdi
                 name="name"
                 required
               />
+              {errors.name && (
+                <span className=" text-red-500">{errors.name.message}</span>
+              )}
             </div>
             <div className="input-wrap">
               <h3 className="input-header">Author</h3>
               <input
-                value={author}
-                onChange={(e) => setAuthor(e.target.value)}
+                {...register('author')}
                 className="input"
                 type="text"
                 placeholder="text"
@@ -68,6 +93,9 @@ export default function ModalEdit({ setModalEditOpen, book, editBook }: ModalEdi
                 name="author"
                 required
               />
+              {errors.author && (
+                <span className=" text-red-500">{errors.author.message}</span>
+              )}
             </div>
             <div className="input-wrap">
               <h3 className="input-header">Topic</h3>

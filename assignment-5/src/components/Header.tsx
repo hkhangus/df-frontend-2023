@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className=" border-b-2 border-black">
       <nav className="navbar flex w-full items-center justify-between p-8">
-        <Link href="./" id="bookstore" className=" text-5xl font-bold">
+        <Link href="/bookstore" id="bookstore" className=" text-5xl font-bold">
           Bookstore
         </Link>
         <div className="flex items-center gap-x-2">
@@ -17,6 +17,9 @@ export default function Header() {
             id="avt"
           />
           <span className=" text-lg">John Doe</span>
+          <Link href="/" className=" text-lg text-red-500 underline">
+            Log out
+          </Link>
         </div>
       </nav>
     </header>

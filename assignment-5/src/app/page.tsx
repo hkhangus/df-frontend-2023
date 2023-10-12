@@ -56,7 +56,7 @@ export default function Login() {
 
             <label htmlFor="Password">Password</label>
             <div className="input-wrap">
-              <input type="text" required {...register('password')} />
+              <input type="password" required {...register('password')} />
               {errors.password && (
                 <span className=" text-red-500">{errors.password.message}</span>
               )}

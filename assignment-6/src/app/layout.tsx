@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import { Header } from '../components'
 import BookProvider from '../context/BookContext'
 import RouteGuard from '../components/RouteGuard'
+import { AuthContextProvider } from '../context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,8 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <RouteGuard>
+          {/* <AuthContextProvider> */}
+
           <Header />
-          {children}
+          <BookProvider>{children}</BookProvider>
+          {/* </AuthContextProvider> */}
         </RouteGuard>
       </body>
     </html>

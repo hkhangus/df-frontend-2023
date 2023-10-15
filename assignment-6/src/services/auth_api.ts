@@ -5,7 +5,8 @@ export const authApi = {
   async login(loginRequest: LoginRequest): Promise<UserProfile> {
     return axiosInstance.post('/auth/login', loginRequest)
   },
+
   getProfile(): Promise<ResponseWithData<UserProfile>> {
     return axiosInstance.get('/me')
-  }
+  },
 }

@@ -9,12 +9,12 @@ export default function RouteGuard({ children }) {
   useEffect(() => {
     const isLoggedIn = Boolean(getAccessToken());
 
-    if (!isLoggedIn && pathname !== "/login") {
-      router.push("/login");
-    }
-    else if (isLoggedIn && pathname === "/login") {
-      router.push("/bookstore");
-    }
+    // if (!isLoggedIn && pathname !== "/login") {
+    //   router.push("/login");
+    // }
+    // else if (isLoggedIn && pathname === "/login") {
+    //   router.push("/bookstore");
+    // }
   })
 
   return <>{children}</>;

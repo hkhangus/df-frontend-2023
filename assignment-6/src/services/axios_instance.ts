@@ -4,7 +4,7 @@ import { getAccessToken } from '../utils/functions/get_access_token'
 
 
 export const axiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },

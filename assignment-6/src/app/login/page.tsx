@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
+import { useAuthContext } from '../../context/AuthContext'
 
 const LoginSchema = z.object({
   email: z.string().email({ message: '*Invalid email' }),
@@ -29,9 +30,9 @@ export default function Login() {
     resolver: zodResolver(LoginSchema),
   })
 
-  const onSubmit = handleSubmit(async () => {
+  const onSubmit = handleSubmit(async (formValues) => {
     if (!errors.email && !errors.password) {
-      router.push('./bookstore')
+      router.push('/bookstore')
     }
   })
 
@@ -57,7 +58,7 @@ export default function Login() {
               Password
               <div className="input-wrap">
                 <input
-                  type="password"
+                  type="text"
                   id="Password"
                   required
                   {...register('password')}

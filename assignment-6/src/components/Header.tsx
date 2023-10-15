@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import { useAuthSWR } from '../utils/hooks/apis/useAuthSWR'
 
 export default function Header() {
+  const {profile,logout} = useAuthSWR()
   return (
     <header className=" border-b-2 border-black">
       <nav className="navbar flex w-full items-center justify-between p-8">
@@ -17,9 +19,9 @@ export default function Header() {
             id="avt"
           />
           <span className=" text-lg">John Doe</span>
-          <Link href="/" className=" text-lg text-red-500 underline">
+          <button onClick={logout} className=" text-lg text-red-500 underline">
             Log out
-          </Link>
+          </button>
         </div>
       </nav>
     </header>

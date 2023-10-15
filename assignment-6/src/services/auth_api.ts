@@ -3,7 +3,9 @@ import { axiosInstance } from './axios_instance'
 
 export const authApi = {
   async login(loginRequest: LoginRequest): Promise<UserProfile> {
-    return axiosInstance.post('/auth/login', loginRequest)
+    return axiosInstance.post('/auth/login', loginRequest, 
+    {withCredentials: false}
+    )
   },
 
   getProfile(): Promise<ResponseWithData<UserProfile>> {

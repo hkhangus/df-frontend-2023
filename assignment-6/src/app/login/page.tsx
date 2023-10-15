@@ -4,7 +4,8 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useAuthContext } from '../../context/AuthContext'
+// import { useAuthContext } from '../../context/AuthContext'
+import { useAuthSWR } from '../../utils/hooks/apis/useAuthSWR'
 
 const LoginSchema = z.object({
   email: z.string().email({ message: '*Invalid email' }),
@@ -18,6 +19,7 @@ type LoginSchemaType = z.infer<typeof LoginSchema>
 
 export default function Login() {
   const router = useRouter()
+  const { login } = useAuthSWR()
   const {
     formState: { errors },
     register,
@@ -32,7 +34,13 @@ export default function Login() {
 
   const onSubmit = handleSubmit(async (formValues) => {
     if (!errors.email && !errors.password) {
-      router.push('/bookstore')
+      try {
+        await login(formValues)
+        router.push('/bookstore')        
+      } catch (error) {
+        console.log(error)
+      }
+      
     }
   })
 

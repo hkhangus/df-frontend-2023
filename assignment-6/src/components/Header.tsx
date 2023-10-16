@@ -1,8 +1,16 @@
 import Link from 'next/link'
 import { useAuthSWR } from '../utils/hooks/apis/useAuthSWR'
+import { useRouter } from 'next/navigation'
 
 export default function Header() {
   const {profile,logout} = useAuthSWR()
+  const router = useRouter()
+  const handleLogout = () => {
+    logout()
+    router.push('/login')
+  }
+
+  
   return (
     <header className=" border-b-2 border-black">
       <nav className="navbar flex w-full items-center justify-between p-8">
@@ -19,7 +27,7 @@ export default function Header() {
             id="avt"
           />
           <span className=" text-lg">John Doe</span>
-          <button onClick={logout} className=" text-lg text-red-500 underline">
+          <button onClick={handleLogout} className=" text-lg text-red-500 underline">
             Log out
           </button>
         </div>

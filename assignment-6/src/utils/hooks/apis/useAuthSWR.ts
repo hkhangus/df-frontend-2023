@@ -30,9 +30,9 @@ export function useAuthSWR({ options }: UseAuthSWRProps = {}) {
     if (isSSR()) return
 
     const data = await authApi.login(payload)
-
+    console.log('jwt', data.data.accessToken)
     if (data?.data?.accessToken) {
-      console.log('jwt', data.data.accessToken)
+      // console.log('jwt', data.data.accessToken)
       localStorage.setItem('jwt', JSON.stringify(data.data.accessToken))
     }
 
@@ -41,7 +41,7 @@ export function useAuthSWR({ options }: UseAuthSWRProps = {}) {
 
   async function logout() {
     if (isSSR()) return
-    localStorage.removeItem('jwt')
+    await localStorage.removeItem('jwt')
   }
 
   return {

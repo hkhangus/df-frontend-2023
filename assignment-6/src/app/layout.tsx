@@ -4,7 +4,6 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Header } from '../components'
-import BookProvider from '../context/BookContext'
 import RouteGuard from '../components/RouteGuard'
 import { AuthContextProvider } from '../context/AuthContext'
 
@@ -27,7 +26,8 @@ export default function RootLayout({
           {/* <AuthContextProvider> */}
 
           <Header />
-          <BookProvider>{children}</BookProvider>
+          {/* <BookProvider>{children}</BookProvider> */}
+          {children}
           {/* </AuthContextProvider> */}
         </RouteGuard>
       </body>

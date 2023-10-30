@@ -4,18 +4,26 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useParams, notFound, useRouter } from 'next/navigation'
 import { ModalDelete } from '../../../components'
-import { useBook } from '../../../context/BookContext'
+import { useBookSWR } from '../../../utils/hooks/apis/useBookSWR'
+import useSWR from 'swr'
+
 
 export default function BookDetail() {
-  const { books, deleteBookContext } = useBook()
-
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
 
   const router = useRouter()
   const params = useParams()
+  const bookId = Number(params?.id as string)
+  console.log(params, bookId)
+  const {bookDetail, handleDeleteBook,books} = useBookSWR({bookId,})
+  console.log('books',books)
+  // const { data, error, isLoading } = useSWR(['book-detail', bookId], () => bookApi.get(bookId))
+  // const bookDetail = data?.data
+  // const {handleDeleteBook} = useBookSWR()
+  // console.log(bookDetail)
+  
 
-  const bookDetail = books.find((book) => `${book.id}` === params.id)
-
+  console.log(bookDetail)
   if (!bookDetail) return notFound()
 
   function handleOpen(e) {
@@ -36,7 +44,7 @@ export default function BookDetail() {
       </div>
       <div className=" text-xl">
         <h2 className=" font-bold">
-          Topic: <span className=" font-normal">{bookDetail.topic}</span>
+          Topic: <span className=" font-normal">{bookDetail.topic.name}</span>
         </h2>
       </div>
 
@@ -52,7 +60,7 @@ export default function BookDetail() {
         setModalDeleteOpen={setDeleteModalOpen}
         book={bookDetail}
         handleDelete={(item) => {
-          deleteBookContext(item)
+          handleDeleteBook(item)
           router.back()
         }}
       />

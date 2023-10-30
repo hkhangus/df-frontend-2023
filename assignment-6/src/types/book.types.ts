@@ -9,7 +9,13 @@ export type Book = {
   name: string;
   author: string;
   // topic: Topic;
-  topic: string,
+  topic: Topic,
 };
+
+export interface BookPayload {
+  name: string;
+  author: string;
+  topicId: number | string
+}
 
 export type BookList = Array<Book>

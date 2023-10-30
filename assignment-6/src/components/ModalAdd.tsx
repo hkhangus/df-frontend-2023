@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { Book } from '../types'
+import { Book, BookPayload, Topic } from '../types'
 
 function generateRandomString() {
-  return Math.random().toString(36).substring(2, 15)
+  return Number(Math.random().toString(36).substring(2, 15))
 }
 
 const BookSchema = z.object({
@@ -36,18 +36,23 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
     resolver: zodResolver(BookSchema),
   })
 
-  const [topic, setTopic] = useState<string>('Programming')
+  const TopicValues: Topic[] = [
+    { id: 1, name: 'Programming', code: 'programming' },
+    { id: 2, name: 'Databse', code: 'databse' },
+    { id: 3, name: 'DevOps', code: 'devops' },
+  ]
+
+  const [topic, setTopic] = useState<Topic>(TopicValues[0])
 
   const onSubmit = handleSubmit(async (formValues) => {
     if (!errors.author && !errors.name) {
-      const newBook: Book = {
-        id: generateRandomString(),
+      const newBook: BookPayload = {
         name: formValues.name,
         author: formValues.author,
-        topic,
+        topicId: topic.id,
       }
       setBooks(newBook)
-      setTopic('Programming')
+      setTopic(TopicValues[0])
     }
   })
 
@@ -106,8 +111,8 @@ export default function ModalAdd({ setModalAddOpen, setBooks }: ModalAddProps) {
                 <select
                   id="input-topic"
                   name="topic"
-                  value={topic}
-                  onChange={(e) => setTopic(e.target.value)}
+                  value={topic.name}
+                  onChange={(e) => setTopic(TopicValues.filter((t) => t.name === e.target.value)[0])}
                 >
                   <option value="Programming">Programming</option>
                   <option value="Databse">Databse</option>

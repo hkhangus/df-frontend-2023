@@ -5,9 +5,10 @@ import { getAccessToken } from '../utils/functions/get_access_token'
 
 export const axiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
-  withCredentials: false,
+  // withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
+    'Accept': 'application/json',
   },
 })
 

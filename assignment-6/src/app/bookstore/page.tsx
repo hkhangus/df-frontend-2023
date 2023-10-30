@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react'
 import { Book, BookList } from '../../types'
-import { useBook } from '../../context/BookContext'
+import { useBookSWR } from '../../utils/hooks/apis/useBookSWR'
 import {
   Button,
   LineBook,
@@ -12,15 +12,12 @@ import {
   Pagination,
 } from '../../components'
 
+
 export default function BookHome() {
   const PAGE_SIZE = 5
 
-  // const [books, setBooks] = useLocalStorage('books', DEFAULT_BOOK)
-  const { books, deleteBookContext, addBookContext, editBookContext } =
-    useBook()
-
-  // const [books, setBooks] = useState(DEFAULT_BOOK)
-
+  const {books, handleAddBook, handleDeleteBook, handleUpdateBook} = useBookSWR()
+  console.log('books',books)
   const [isAddModalOpen, setAddModalOpen] = useState(false)
   // Deletebook
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false)
@@ -131,7 +128,7 @@ export default function BookHome() {
       </div>
 
       {isAddModalOpen ? (
-        <ModalAdd setModalAddOpen={setAddModalOpen} setBooks={addBookContext} />
+        <ModalAdd setModalAddOpen={setAddModalOpen} setBooks={handleAddBook} />
       ) : null}
 
       <ModalDelete
@@ -139,7 +136,7 @@ export default function BookHome() {
         setModalDeleteOpen={setDeleteModalOpen}
         book={deleteBook}
         handleDelete={(item: Book) => {
-          deleteBookContext(item)
+          handleDeleteBook(item)
           if (isSearch && resultSearchBooks.includes(deleteBook)) {
             setResultBooks(
               resultSearchBooks.filter((book) => book.id !== item.id),
@@ -152,7 +149,7 @@ export default function BookHome() {
         <ModalEdit
           setModalEditOpen={setEditModalOpen}
           book={editBook}
-          editBook={editBookContext}
+          editBook={handleUpdateBook}
         />
       ) : null}
     </>

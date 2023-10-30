@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Dispatch, SetStateAction } from 'react'
 import { Book } from '../types'
+import { useRouter } from 'next/navigation'
 
 interface LineBookProps {
   book: Book
@@ -30,12 +31,12 @@ export default function LineBook({
     setModalEditOpen(true)
     setEditBook(book)
   }
-
+  const router = useRouter()
   return (
     <tr key={book.id}>
       <td>{book.name}</td>
       <td>{book.author}</td>
-      <td>{book.topic}</td>
+      <td>{book.topic.name}</td>
       <td className="delete-click">
         <button
           className=" border-r-2 border-solid border-red-500 pr-2 text-red-500 underline"
@@ -43,8 +44,9 @@ export default function LineBook({
         >
           Delete
         </button>
-        <button className="border-r-2 border-solid border-red-500 pl-2 pr-2 text-red-500 underline">
-          <Link href={`bookstore/${book.id}`}>View</Link>
+        <button className="border-r-2 border-solid border-red-500 pl-2 pr-2 text-red-500 underline" >
+          <Link href={`/bookstore/${book.id}`}>View</Link>
+          {/* View */}
         </button>
         <button
           className=" pl-2 text-red-500 underline"

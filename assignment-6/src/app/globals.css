@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-size: 62.5%;
+  line-height: 1.6rem;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+/* MAIN */
+.app {
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-lg bg-red-500 p-4 text-white;
+  }
+
+  .table__content {
+    @apply w-full border-collapse;
+  }
+
+  table,
+  thead,
+  td,
+  th {
+    @apply px-2 py-4 text-left;
+  }
+
+  table,
+  tr > * {
+    @apply border-2 border-solid border-zinc-400 bg-stone-100 text-left text-xl;
+  }
+
+  thead {
+    @apply font-bold;
+  }
+
+  .table tr th:first-child {
+    /* width: 45%; */
+    @apply w-[45%];
+  }
+
+  .table tr th:nth-child(2) {
+    /* width: 30%; */
+    @apply w-[30%];
+  }
+
+  .table tr th:nth-child(3) {
+    /* width: 15%; */
+    @apply w-[15%];
+  }
+
+  .table tr th:last-child {
+    /* width: 10%; */
+    @apply w-[10%];
+  }
+
+
+  /* MODAL */
+  .modal {
+    @apply fixed inset-0 bg-zinc-500 bg-opacity-75 transition-opacity;
+  }
+
+  .form-wrapper {
+    @apply flex h-screen;
+  }
+
+  .close {
+    @apply absolute right-0 top-0 h-16 w-16;
+  }
+
+  .form {
+    @apply relative m-auto flex  flex-col border-2 border-zinc-400 bg-white text-2xl;
+  }
+
+  /* ADD MODAL */
+  .add-form {
+    @apply justify-evenly p-8 h-2/4 w-2/5;
+  }
+
+  .form-header {
+    @apply font-bold;
+  }
+
+  .input-wrap {
+    @apply py-2;
+  }
+
+  .input-header {
+    @apply text-xl font-bold text-gray-500;
+  }
+
+  .input-wrap input,
+  .input-wrap select {
+    @apply h-12 w-full rounded-md border-2 border-solid border-zinc-400;
+  }
+
+  input[type='text'], input[type='search'],
+  select {
+    @apply box-border px-2;
+  }
+
+  /* DELETE MODAL */
+  .delete-form {
+    @apply flex justify-around items-center h-1/4 w-2/4
+  }
+}
